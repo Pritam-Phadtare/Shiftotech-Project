@@ -1,0 +1,60 @@
+kind: HorizontalPodAutoscaller
+apiVersion: autoscaling/v2
+metadata:
+  name: nginx-hpa
+  namespace: coding-cloud
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    apiVersion: apps/v1
+    name: nginx-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+
+---
+kind: HorizontalPodAutoscaller
+apiVersion: autoscaling/v2
+metadata:
+  name: frontend-hpa
+  namespace: coding-cloud
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    apiVersion: apps/v1
+    name: frontend-deployment
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+
+---
+kind: HorizontalPodAutoscaller
+apiVersion: autoscaling/v2
+metadata:
+  name: backend-hpa
+  namespace: coding-cloud
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
