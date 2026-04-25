@@ -15,7 +15,7 @@ pipeline {
             }
             stages {
                 
-                stage('Checking Out SRC') {
+                stage('Checkout SRC') {
                     agent { label 'docker' }
                     steps {
                         echo "Checking out Frontend Code"
