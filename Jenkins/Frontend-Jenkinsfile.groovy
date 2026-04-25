@@ -19,7 +19,7 @@ pipeline {
                     agent { label 'docker' }
                     steps {
                         echo "Checking out Frontend Code"
-                        git url:'https://github.com/Pritam-Phadtare/Edutech-Platform-DevOps-Automation.git', branch:'master'
+                        git url:'https://github.com/Pritam-Phadtare/Shiftotech-Project.git', branch:'master'
                         echo "Checkout Completed"
                     }
                 }
