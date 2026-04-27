@@ -38,8 +38,8 @@ A brief description of what this project does and who it's for
 - [Kubernetes](#-kubernetes)
 - [Infrastructure — Terraform (AWS)](#-infrastructure--terraform-aws)
 - [Environment Variables](#-environment-variables)
+- [Placeholders](#-placeholders)
 - [Getting Started (Local)](#-getting-started-local)
-- [Known Issues](#-known-issues)
 
 ---
 
@@ -435,8 +435,6 @@ terraform destroy   # to tear down
 | `DB_NAME` | MySQL database name | `enquiry` |
 | `DB_PORT` | MySQL port | `3306` |
 | `FRONTEND_URL` | Allowed CORS origin | `http://frontend:80` |
-
----
 
 ---
 
