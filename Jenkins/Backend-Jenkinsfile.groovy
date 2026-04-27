@@ -8,21 +8,21 @@ pipeline {
 
     stages {
 
+        stage('Checkout SRC') {
+            agent { label 'docker' }
+            steps {
+                echo "Checking out Backend Code"
+                git url:'https://github.com/Pritam-Phadtare/Shiftotech-Project.git', branch:'master'
+                echo "Checkout Completed"
+            }
+        }
+        
         stage('Backend CI/CD Pipeline') {
             when {
                 beforeAgent true
                 changeset "backend/**"
             }
             stages {
-
-                stage('Checkout SRC') {
-                    agent { label 'docker' }
-                    steps {
-                        echo "Checking out Backend Code"
-                        git url:'https://github.com/Pritam-Phadtare/Shiftotech-Project.git', branch:'master'
-                        echo "Checkout Completed"
-                    }
-                }
 
                 stage('Build Backend Image') {
                     agent { label 'docker' } 
@@ -57,7 +57,7 @@ pipeline {
                     steps {
                         sh '''
                           echo "Deployment Update Initiated"
-                          kubectl set image deployment backend-deployment backend=pritam44/coding-cloud-backend:${BUILD_NUMBER}
+                          kubectl set image deployment backend-deployment backend=pritam44/coding-cloud-backend:${BUILD_NUMBER} -n coding-cloud
                           echo "Deployment Update Completed"
                         '''
                     }
@@ -69,18 +69,24 @@ pipeline {
     post {
 
         success {
-            echo "Backend CI/CD Completed Successfully"
+           node('docker') {
+                echo "Backend CI/CD Completed Successfully"
+           }
         }
 
         failure {
-            echo "Backend CI/CD Failed"
+            node('docker') {
+                echo "Backend CI/CD Failed"
+            }
         }
 
         always {
-            echo "Cleaning Up Images"
-            sh 'docker image prune -a -f'
-            cleanWs()
-            echo "Cleaning Up Completed"
+            node('docker') {
+                echo "Cleaning Up Images"
+                sh 'docker image prune -a -f'
+                cleanWs()
+                echo "Cleaning Up Completed"
+            }
         }
     }
 }

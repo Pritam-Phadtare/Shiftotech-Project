@@ -1,0 +1,5 @@
+lb --> private-Instance:ip:31000 --> nginx-svc:80 
+
+/ --> frontend-svc:90 --> frontend-pod's:80
+
+/backend --> backend-svc:5000 --> backend-pod's:5000
