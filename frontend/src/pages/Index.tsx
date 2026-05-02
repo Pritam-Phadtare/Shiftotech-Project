@@ -89,7 +89,7 @@ const Index = () => {
             Welcome to Coding Cloud
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Transform your career with industry-leading courses in software development, 
+            Transform your career with industry-leading courses in software development & IT, 
             cloud computing, and data science. Learn from experts and build real-world projects.
           </p>
           <div className="flex flex-wrap gap-4 justify-center text-sm text-foreground/70">
